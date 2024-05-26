@@ -75,7 +75,7 @@ const insertUser = (userData) => {
       if (error) {
         return reject(error);
       }
-      resolve(results.insertId);
+      resolve(results.affectedRows);
     });
   });
 };

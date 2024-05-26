@@ -53,13 +53,15 @@ const postUserService = async (userData) => {
       .insertUser(userData)
       .then((insertId) => {
         console.log(`Inserted userData data with id: ${insertId}`);
+        return insertId;
       })
       .catch((error) => {
         console.error("Error inserting userData data:", error);
       });
+    console.log("userPostData", userPostData);
     return userPostData;
   } catch (e) {
-    console.log("error", error);
+    console.log("error", e);
     throw e;
   }
 };

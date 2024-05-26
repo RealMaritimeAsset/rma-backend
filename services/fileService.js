@@ -6,7 +6,6 @@ const lib = require("../utils/lib");
 const fileToIpfsUploadService = async (fileData) => {
   try {
     const filePath = fileData.path;
-    const fileName = fileData.filename;
     const filePathData = fs.readFileSync(path.join(__dirname, "../", filePath));
     const ipfsUri = lib.ipfsFileUpload(filePathData);
     return ipfsUri;
