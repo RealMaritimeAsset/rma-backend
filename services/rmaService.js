@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const cron = require("node-cron");
 const rmaModel = require("../src/models/rmaModel");
+const lib = require("../utils/lib");
 
 // // 주기적인 작업 설정
 // const scheduleDataFetching = () => {
@@ -63,7 +64,7 @@ const postUserService = async (userData) => {
   }
 };
 
-//회사 등록 서비스
+//회사 등록
 const postCompanyService = async (companyData) => {
   try {
     console.log("companyData", companyData);
@@ -98,7 +99,9 @@ const postShipDetailService = async (shipDetailIpfs) => {
       .catch((error) => {
         console.error("Error insertShipDetail  data:", error);
       });
-    return shipPostData;
+
+    const ipfsUri = lib.ipfsFileUpload(shipDetailIpfs);
+    return shipPostData, ipfsUri;
   } catch (e) {
     console.log("error", error);
     throw e;

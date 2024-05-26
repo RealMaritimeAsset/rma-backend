@@ -4,7 +4,7 @@ const postUser = async (req, res) => {
   try {
     const userData = req.body;
     const data = await rmaService.postUserService(userData);
-    res.status(200).send("success");
+    res.status(200).send({ res: data });
   } catch (error) {
     console.log("error", error);
     res.status(500).send(error.message);
@@ -20,7 +20,7 @@ const postCompany = async (req, res) => {
     };
     const data = await rmaService.postCompanyService(companyData);
     console.log("data", data);
-    res.status(200).send("success");
+    res.status(200).send({ res: data });
   } catch (error) {
     console.log("error", error);
     res.status(500).send(error.message);
@@ -48,7 +48,7 @@ const postShipDetail = async (req, res) => {
     };
     const data = await rmaService.postShipDetailService(shipDetailIpfs);
     console.log("data", data);
-    res.status(200).send("success");
+    res.status(200).send({ res: data });
   } catch (error) {
     console.log("error", error);
     res.status(500).send(error.message);
