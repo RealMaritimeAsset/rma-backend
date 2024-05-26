@@ -129,7 +129,7 @@ const insertShipDetail = (shipDetailIpfs) => {
       if (error) {
         return reject(error);
       }
-      resolve(results.insertId);
+      resolve(results.insertId, results.affectedRows);
     });
   });
 };

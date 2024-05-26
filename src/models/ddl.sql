@@ -14,7 +14,7 @@ CREATE TABLE User (
 
 CREATE TABLE Rwa (
     id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
-    maindId INT,
+    mainId INT,
     subId INT,
     tokenUri VARCHAR(255),
     name VARCHAR(255),
