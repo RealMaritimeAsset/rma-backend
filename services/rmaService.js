@@ -44,8 +44,7 @@ const rmaModel = require("../src/models/rmaModel");
 //   });
 // };
 
-//회사등록 전 단계 테스트를 위한 유저 등록 서비스
-
+//유저 등록 서비스
 const postUserService = async (userData) => {
   try {
     console.log("userData", userData);
@@ -63,6 +62,8 @@ const postUserService = async (userData) => {
     throw e;
   }
 };
+
+//회사 등록 서비스
 const postCompanyService = async (companyData) => {
   try {
     console.log("companyData", companyData);
@@ -85,7 +86,27 @@ const postCompanyService = async (companyData) => {
   }
 };
 
+//선박 디테일 등록 서비스
+const postShipDetailService = async (shipDetailIpfs) => {
+  try {
+    console.log("shipDetailIpfs", shipDetailIpfs);
+    const shipPostData = await rmaModel
+      .insertShipDetail(shipDetailIpfs)
+      .then((insertId) => {
+        console.log(`Inserted insertShipDetail data with id: ${insertId}`);
+      })
+      .catch((error) => {
+        console.error("Error insertShipDetail  data:", error);
+      });
+    return shipPostData;
+  } catch (e) {
+    console.log("error", error);
+    throw e;
+  }
+};
+
 module.exports = {
   postCompanyService,
   postUserService,
+  postShipDetailService,
 };

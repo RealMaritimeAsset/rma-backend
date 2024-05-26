@@ -8,4 +8,7 @@ router.post("/api/v1/register-user", rmaController.postUser);
 //선박 회사 등록
 router.post("/api/v1/register-company", rmaController.postCompany);
 
+//선박 디테일 정보 IPFS 등록
+router.post("/api/v1/register-ship-detail", rmaController.postShipDetail);
+
 module.exports = router;

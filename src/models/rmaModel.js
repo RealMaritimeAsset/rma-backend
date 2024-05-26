@@ -59,6 +59,7 @@ const insertBlockData = (blockData) => {
   });
 };
 
+//유저등록
 const insertUser = (userData) => {
   return new Promise((resolve, reject) => {
     const query =
@@ -79,6 +80,7 @@ const insertUser = (userData) => {
   });
 };
 
+//선박회사 등록
 const updateCompany = (companyData) => {
   return new Promise((resolve, reject) => {
     const query =
@@ -99,10 +101,42 @@ const updateCompany = (companyData) => {
   });
 };
 
-module.exports = { updateCompany };
+//선박 디테일 정보 등록
+const insertShipDetail = (shipDetailIpfs) => {
+  return new Promise((resolve, reject) => {
+    const query = `
+      INSERT INTO Ipfs (
+        amount, type, country, company, name, price, description, uri, builder, weight, expectedDate, imoNumber, expiration, dueDate
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    const values = [
+      shipDetailIpfs.amount,
+      shipDetailIpfs.type,
+      shipDetailIpfs.country,
+      shipDetailIpfs.company,
+      shipDetailIpfs.name,
+      shipDetailIpfs.price,
+      shipDetailIpfs.description,
+      shipDetailIpfs.uri,
+      shipDetailIpfs.builder,
+      shipDetailIpfs.weight,
+      shipDetailIpfs.expectedDate,
+      shipDetailIpfs.imoNumber,
+      shipDetailIpfs.expiration,
+      shipDetailIpfs.dueDate,
+    ];
+    pool.query(query, values, (error, results) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(results.insertId);
+    });
+  });
+};
 
 module.exports = {
   insertBlockData,
   insertUser,
   updateCompany,
+  insertShipDetail,
 };
