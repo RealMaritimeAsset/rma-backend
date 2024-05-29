@@ -63,13 +63,13 @@ const insertBlockData = (blockData) => {
 const insertUser = (userData) => {
   return new Promise((resolve, reject) => {
     const query =
-      "INSERT INTO User (isBusiness, bussinessName, bussinessCa, address, ownedRwaId) VALUES (?, ?, ?, ?, 0)";
+      "INSERT INTO User (is_business, business_name, business_ca, address) VALUES (false, ?, ?, ?)";
     const values = [
-      userData.isBusiness,
-      userData.bussinessName,
-      userData.bussinessCa,
+      userData.is_business,
+      userData.business_name,
+      userData.business_ca,
       userData.address,
-      userData.ownedRwaId,
+      //userData.ownedRwaId,
     ];
     pool.query(query, values, (error, results) => {
       if (error) {
@@ -84,13 +84,12 @@ const insertUser = (userData) => {
 const updateCompany = (companyData) => {
   return new Promise((resolve, reject) => {
     const query =
-      "UPDATE User SET isBusiness = true, bussinessName = ?, bussinessCa = ?, address = ?, ownedRwaId = ? WHERE id = ?";
+      "UPDATE User SET is_business = true, business_name = ?, business_ca = ?, address = ? WHERE id = ?";
     const values = [
-      companyData.bussinessName,
-      companyData.bussinessCa,
+      companyData.business_name,
+      companyData.bussiness_ca,
       companyData.address,
-      companyData.ownedRwaId,
-      companyData.userId,
+      companyData.id,
     ];
     pool.query(query, values, (error, results) => {
       if (error) {
@@ -106,7 +105,7 @@ const insertShipDetail = (shipDetailIpfs) => {
   return new Promise((resolve, reject) => {
     const query = `
       INSERT INTO Ipfs (
-        amount, type, country, company, name, price, description, uri, builder, weight, expectedDate, imoNumber, expiration, dueDate
+        amount, type, country, company, name, price, description, uri, builder, weight, expected_date, imo_number, expiration, due_date
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     const values = [
@@ -120,10 +119,10 @@ const insertShipDetail = (shipDetailIpfs) => {
       shipDetailIpfs.uri,
       shipDetailIpfs.builder,
       shipDetailIpfs.weight,
-      shipDetailIpfs.expectedDate,
-      shipDetailIpfs.imoNumber,
+      shipDetailIpfs.expected_date,
+      shipDetailIpfs.imo_number,
       shipDetailIpfs.expiration,
-      shipDetailIpfs.dueDate,
+      shipDetailIpfs.due_date,
     ];
     pool.query(query, values, (error, results) => {
       if (error) {

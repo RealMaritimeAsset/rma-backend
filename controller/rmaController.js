@@ -14,9 +14,10 @@ const postUser = async (req, res) => {
 const postCompany = async (req, res) => {
   try {
     const companyData = {
-      userId: req.body.userId,
-      bussinessName: req.body.bussinessName,
-      bussinessCa: req.body.bussinessCa,
+      id: req.body.id,
+      business_name: req.body.business_name,
+      bussiness_ca: req.body.bussiness_ca,
+      address: req.body.address,
     };
     const data = await rmaService.postCompanyService(companyData);
     console.log("data", data);
@@ -38,12 +39,12 @@ const postShipDetail = async (req, res) => {
       uri: req.body.uri, //선박 이미지 URI
       builder: req.body.builder, //선박 빌더, 메이커
       weight: req.body.weight, //선박 총 톤수,
-      expectedDate: req.body.expectedDate, //선박이 운행할 수 있는 마지막 날짜 예시)) 2035-04-30
-      imoNumber: req.body.imoNumber, //선박 IMO 넘버, 주민등록번호
+      expected_date: req.body.expected_date, //선박이 운행할 수 있는 마지막 날짜 예시)) 2035-04-30
+      imo_number: req.body.imo_number, //선박 IMO 넘버, 주민등록번호
       country: req.body.country, //만들어진 국가
       company: req.body.company, //등록하는 선박 회사
       expiration: req.body.expiration, //선박이 운행할 수 있는 기간, 예시)) 10Y면 10년, 15Y면 15년
-      dueDate: req.body.dueDate, //펀딩 마감기한 예시)) 2024-12-31
+      due_date: req.body.due_date, //펀딩 마감기한 예시)) 2024-12-31
       network: req.body.network, //등록할 네트워크, 디폴트는 이더리움
     };
     const data = await rmaService.postShipDetailService(shipDetailIpfs);

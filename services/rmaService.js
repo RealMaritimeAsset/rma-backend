@@ -84,7 +84,7 @@ const postCompanyService = async (companyData) => {
     console.log("data", data);
     return data;
   } catch (e) {
-    console.log("error", error);
+    console.log("error", e);
     throw e;
   }
 };
