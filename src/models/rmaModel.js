@@ -1,53 +1,33 @@
 const pool = require("../config/database"); // 데이터베이스 설정을 임포트
 
-// const getLatestPeerData = () => {
-//   return new Promise((resolve, reject) => {
-//     pool.query(
-//       "SELECT * FROM peer_data ORDER BY id DESC LIMIT 1",
-//       (error, results) => {
-//         if (error) {
-//           return reject(error);
-//         }
-//         resolve(results[0]);
-//       }
-//     );
-//   });
-// };
-
-const insertBlockData = (blockData) => {
+const insertRwaData = (rwaDataChg) => {
   return new Promise((resolve, reject) => {
     const query = `
-        INSERT INTO block_data (
-          block_hash,
-          previous_hash,
-          previous_state_root,
-          transactions_root,
-          finalize_root,
-          ratifications_root,
-          solutions_root,
-          subdag_root,
-          metadata_json,
-          authority_json,
-          ratifications_json,
-          transactions_json,
-          aborted_transaction_ids_json
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        INSERT INTO Rwa (
+          main_id,
+          sub_id,
+          token_uri,
+          name,
+          amount,
+          company,
+          network,
+          user_id,
+          ipfs_id,
+          sold_amount
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       `;
 
     const values = [
-      blockData.block_hash,
-      blockData.previous_hash,
-      blockData.header.previous_state_root,
-      blockData.header.transactions_root,
-      blockData.header.finalize_root,
-      blockData.header.ratifications_root,
-      blockData.header.solutions_root,
-      blockData.header.subdag_root,
-      JSON.stringify(blockData.header.metadata),
-      JSON.stringify(blockData.authority),
-      JSON.stringify(blockData.ratifications),
-      JSON.stringify(blockData.transactions),
-      JSON.stringify(blockData.aborted_transaction_ids),
+      rwaDataChg.main_id,
+      rwaDataChg.sub_id,
+      rwaDataChg.token_uri,
+      rwaDataChg.name,
+      rwaDataChg.amount,
+      rwaDataChg.company,
+      rwaDataChg.network,
+      rwaDataChg.user_id,
+      rwaDataChg.ipfs_id,
+      rwaDataChg.sold_amount,
     ];
 
     pool.query(query, values, (error, results) => {
@@ -162,9 +142,9 @@ const selectMyPageDetail = (address) => {
 };
 
 module.exports = {
-  insertBlockData,
   insertUser,
   updateCompany,
   insertShipDetail,
+  insertRwaData,
   selectMyPageDetail,
 };

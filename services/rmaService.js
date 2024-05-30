@@ -126,8 +126,49 @@ const getMypageDetailService = async (address) => {
   }
 };
 
+//rwa 토큰 민팅 서비스
+const mintRwaService = async (rwaData) => {
+  try {
+    console.log("rwaData", rwaData);
+    for (let i = 0; i < rwaData.subIdAmounts; i++) {
+      console.log("i", i);
+      let rwaDataChg = {
+        address: rwaData.recipient,
+        main_id: rwaData.mainId,
+        sub_id: i,
+        amount: rwaData.tokenAmounts,
+        token_uri: rwaData.tokenUris[i],
+        name: rwaData.name,
+        company: rwaData.company,
+        network: rwaData.network,
+        user_id: rwaData.user_id,
+        ipfs_id: rwaData.ipfs_id,
+        sold_amount: rwaData.sold_amount,
+      };
+      console.log(rwaDataChg);
+      const rwaPostData = await rmaModel
+        .insertRwaData(rwaDataChg)
+        .then((insertId) => {
+          console.log(`Inserted rwaPostData data with id: ${insertId}`);
+          return insertId;
+        })
+        .catch((error) => {
+          console.error("Error inserting rwaPostData data:", error);
+        });
+      console.log("rwaPostData", rwaPostData);
+    }
+
+    return rwaData;
+    //return rwaPostData[rwaPostData.length - 1];
+  } catch (e) {
+    console.log("error", e);
+    throw e;
+  }
+};
+
 module.exports = {
   postCompanyService,
   postUserService,
   getMypageDetailService,
+  mintRwaService,
 };

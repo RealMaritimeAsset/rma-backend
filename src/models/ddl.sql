@@ -14,20 +14,24 @@ CREATE TABLE `User` (
 
 -- CreateTable
 CREATE TABLE `Rwa` (
-    `id` VARCHAR(36) NOT NULL,
-    `main_id` INTEGER NOT NULL,
-    `sub_id` INTEGER NOT NULL,
-    `token_uri` VARCHAR(191) NOT NULL,
-    `name` VARCHAR(191) NOT NULL,
-    `created_at` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-    `amount` INTEGER NOT NULL,
-    `company` VARCHAR(191) NOT NULL,
-    `network` VARCHAR(191) NOT NULL,
-    `user_id` VARCHAR(191) NOT NULL,
-    `ipfs_id` VARCHAR(191) NULL,
-    `sold_amount` INTEGER NOT NULL,
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT (uuid()),
+  `main_id` int NOT NULL,
+  `sub_id` int NOT NULL,
+  `token_uri` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `amount` int NOT NULL,
+  `company` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `network` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ipfs_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sold_amount` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Rwa_user_id_fkey` (`user_id`),
+  KEY `Rwa_ipfs_id_fkey` (`ipfs_id`),
+  CONSTRAINT `Rwa_ipfs_id_fkey` FOREIGN KEY (`ipfs_id`) REFERENCES `Ipfs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `Rwa_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 
 -- CreateTable
 CREATE TABLE `Ipfs` (

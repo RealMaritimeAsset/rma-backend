@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const rmaController = require("../../controller/rmaController");
 const fileController = require("../../controller/fileController");
-const blockController = require("../../controller/blockController");
 
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -34,8 +33,10 @@ router.post(
 );
 
 //선박 RWA 민팅 데이터 적재
-router.post("/api/v1/mint-rwa", blockController.mintRwa);
+router.post("/api/v1/mint-rwa", rmaController.mintRwa);
 
+//마이페이지 조회, 기업용 마이페이지 조회
+//RWA 토큰 등록시 메인 아이디 조회
 router.get("/api/v1/mypage/:address", rmaController.getMypageDetail);
 
 module.exports = router;
