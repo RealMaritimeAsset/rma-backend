@@ -133,9 +133,38 @@ const insertShipDetail = (shipDetailIpfs) => {
   });
 };
 
+const selectMyPageDetail = (address) => {
+  return new Promise((resolve, reject) => {
+    const query = `    
+    SELECT 
+      a.id, 
+      a.is_business, 
+      a.business_name, 
+      a.business_ca, 
+      a.created_at, 
+      a.address, 
+      b.main_id 
+    FROM User a
+    left join Rwa b on a.id = b.user_id  
+    where a.address = ?
+    `;
+
+    console.log("address222", address);
+    pool.query(query, [address], (error, results) => {
+      // Pass the address as an array
+      if (error) {
+        return reject(error);
+      }
+      console.log(results);
+      resolve(results[0]);
+    });
+  });
+};
+
 module.exports = {
   insertBlockData,
   insertUser,
   updateCompany,
   insertShipDetail,
+  selectMyPageDetail,
 };

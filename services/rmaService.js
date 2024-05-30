@@ -110,8 +110,24 @@ const postShipDetailService = async (shipDetailIpfs) => {
   }
 };
 
+//선박 디테일 등록 서비스
+const getMypageDetailService = async (address) => {
+  try {
+    console.log("address3", address);
+    const data = await rmaModel.selectMyPageDetail(address);
+    console.log("data", data);
+    if (data.main_id === null) {
+      data.main_id = 0;
+    }
+    return data;
+  } catch (e) {
+    console.log("error", e);
+    throw e;
+  }
+};
+
 module.exports = {
   postCompanyService,
   postUserService,
-  postShipDetailService,
+  getMypageDetailService,
 };

@@ -36,4 +36,6 @@ router.post(
 //선박 RWA 민팅 데이터 적재
 router.post("/api/v1/mint-rwa", blockController.mintRwa);
 
+router.get("/api/v1/mypage/:address", rmaController.getMypageDetail);
+
 module.exports = router;

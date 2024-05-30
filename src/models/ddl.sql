@@ -46,8 +46,7 @@ CREATE TABLE `Ipfs` (
     `expected_date` TIMESTAMP(0) NOT NULL,
     `imo_number` INTEGER NOT NULL,
     `expiration` TIMESTAMP(0) NOT NULL,
-    `due_date` TIMESTAMP(0) NOT NULL,
-    PRIMARY KEY (`id`)
+    `due_date` TIMESTAMP(0) NOT NULL
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
