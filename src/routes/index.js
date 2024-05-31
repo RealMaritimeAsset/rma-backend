@@ -39,4 +39,7 @@ router.post("/api/v1/mint-rwa", rmaController.mintRwa);
 //RWA 토큰 등록시 메인 아이디 조회
 router.get("/api/v1/mypage/:address", rmaController.getMypageDetail);
 
+//기업 RWA 토큰 관리 페이지 조회
+router.get("/api/v1/manage-rwa/:address", rmaController.manageRwa);
+
 module.exports = router;

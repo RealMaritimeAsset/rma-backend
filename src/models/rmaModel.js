@@ -1,5 +1,6 @@
 const pool = require("../config/database"); // 데이터베이스 설정을 임포트
 
+//Rwa data insert 서비스
 const insertRwaData = (rwaDataChg) => {
   return new Promise((resolve, reject) => {
     const query = `
@@ -113,6 +114,7 @@ const insertShipDetail = (shipDetailIpfs) => {
   });
 };
 
+//마이페이지 조회
 const selectMyPageDetail = (address) => {
   return new Promise((resolve, reject) => {
     const query = `    
@@ -141,10 +143,44 @@ const selectMyPageDetail = (address) => {
   });
 };
 
+//Rwa 토큰 조회
+const selectManageRwa = (address) => {
+  return new Promise((resolve, reject) => {
+    const query = `    
+    SELECT 
+      a.id, 
+      a.is_business, 
+      a.business_name, 
+      a.business_ca, 
+      a.created_at, 
+      a.address, 
+      b.main_id,
+      b.sub_id,
+      c.reward,
+      c.created_at
+    FROM User a
+    left join Rwa b on a.id = b.user_id
+    left join Reward c on c.rwa_id = b.id   
+    where a.address = ?
+    `;
+
+    console.log("address222", address);
+    pool.query(query, [address], (error, results) => {
+      // Pass the address as an array
+      if (error) {
+        return reject(error);
+      }
+      console.log(results);
+      resolve(results);
+    });
+  });
+};
+
 module.exports = {
   insertUser,
   updateCompany,
   insertShipDetail,
   insertRwaData,
   selectMyPageDetail,
+  selectManageRwa,
 };

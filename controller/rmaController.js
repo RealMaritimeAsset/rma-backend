@@ -109,11 +109,25 @@ const mintRwa = async (req, res) => {
   }
 };
 
+const manageRwa = async (req, res) => {
+  try {
+    const { address } = req.params;
+    console.log("address", address);
+    const data = await rmaService.manageRwaService(address);
+    console.log("data", data);
+    res.status(200).send({ res: data });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   postUser,
   postCompany,
   postShipDetail,
   insertRwaContract,
-  getMypageDetail,
   mintRwa,
+  getMypageDetail,
+  manageRwa,
 };
