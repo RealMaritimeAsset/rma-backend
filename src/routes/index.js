@@ -52,6 +52,6 @@ router.get("/api/v1/manage-rwa/:address", rmaController.manageRwa);
 router.get("/api/v1/rwa-market", rmaController.getRwaMarket);
 
 //RWA 마켓 상세 조회 GET
-//router.get("/api/v1/rwa-market/:id", rmaController.getRwaMarketDetail);
+router.get("/api/v1/rwa-market/detail/:id", rmaController.getRwaMarketDetail);
 
 module.exports = router;

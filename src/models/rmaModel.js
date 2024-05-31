@@ -176,7 +176,7 @@ const selectManageRwa = (address) => {
   });
 };
 
-//Rwa 토큰 조회
+//Rwa 마켓 토큰 조회
 const selectRwaMarket = () => {
   return new Promise((resolve, reject) => {
     const query = `    
@@ -206,6 +206,36 @@ const selectRwaMarket = () => {
   });
 };
 
+const selectRwaMarketDetail = (rwaId) => {
+  return new Promise((resolve, reject) => {
+    const query = `    
+    SELECT 
+      id,
+      main_id,
+      sub_id,
+      token_uri,
+      name,
+      created_at,
+      amount,
+      company,
+      network,
+      user_id,
+      ipfs_id,
+      sold_amount 
+    FROM Rwa 
+    where id = ? 
+    `;
+    pool.query(query, [rwaId], (error, results) => {
+      // Pass the address as an array
+      if (error) {
+        return reject(error);
+      }
+      console.log(results);
+      resolve(results);
+    });
+  });
+};
+
 module.exports = {
   insertUser,
   updateCompany,
@@ -214,4 +244,5 @@ module.exports = {
   selectMyPageDetail,
   selectManageRwa,
   selectRwaMarket,
+  selectRwaMarketDetail,
 };

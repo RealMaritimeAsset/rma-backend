@@ -133,6 +133,22 @@ const getRwaMarket = async (req, res) => {
   }
 };
 
+const getRwaMarketDetail = async (req, res) => {
+  try {
+    console.log(req.params);
+    console.log(req.params.id);
+    const rwaId = req.params.id;
+    console.log("rwaId", rwaId);
+    const data = await rmaService.getRwaMarketDetailService(rwaId);
+    //data = "test";
+    console.log("data", data);
+    res.status(200).send({ res: data });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   postUser,
   postCompany,
@@ -142,4 +158,5 @@ module.exports = {
   getMypageDetail,
   manageRwa,
   getRwaMarket,
+  getRwaMarketDetail,
 };

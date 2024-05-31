@@ -195,6 +195,18 @@ const getRwaMarketService = async () => {
   }
 };
 
+//getRwaMarketService
+const getRwaMarketDetailService = async (rwaId) => {
+  try {
+    const data = await rmaModel.selectRwaMarketDetail(rwaId);
+    console.log("data", data);
+    return data;
+  } catch (e) {
+    console.log("error", e);
+    throw e;
+  }
+};
+
 module.exports = {
   postCompanyService,
   postUserService,
@@ -202,4 +214,5 @@ module.exports = {
   mintRwaService,
   manageRwaService,
   getRwaMarketService,
+  getRwaMarketDetailService,
 };
