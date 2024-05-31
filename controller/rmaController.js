@@ -122,6 +122,17 @@ const manageRwa = async (req, res) => {
   }
 };
 
+const getRwaMarket = async (req, res) => {
+  try {
+    const data = await rmaService.getRwaMarketService();
+    console.log("data", data);
+    res.status(200).send({ res: data });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   postUser,
   postCompany,
@@ -130,4 +141,5 @@ module.exports = {
   mintRwa,
   getMypageDetail,
   manageRwa,
+  getRwaMarket,
 };
