@@ -146,6 +146,21 @@ const getRwaMarketDetail = async (req, res) => {
   }
 };
 
+const getShipWeather = async (req, res) => {
+  try {
+    console.log(req.query);
+    const lat = req.query.lat;
+    const lon = req.query.lon;
+    console.log("lat", lat);
+    console.log("lon", lon);
+    const data = await rmaService.getShipWeatherService(lat, lon);
+    res.status(200).send(data);
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   postUser,
   postCompany,
@@ -156,4 +171,5 @@ module.exports = {
   manageRwa,
   getRwaMarket,
   getRwaMarketDetail,
+  getShipWeather,
 };

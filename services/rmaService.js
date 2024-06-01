@@ -2,6 +2,7 @@ const fetch = require("node-fetch");
 const cron = require("node-cron");
 const rmaModel = require("../src/models/rmaModel");
 const lib = require("../utils/lib");
+const axios = require("axios");
 
 // // 주기적인 작업 설정
 // const scheduleDataFetching = () => {
@@ -206,6 +207,26 @@ const getRwaMarketDetailService = async (rwaId) => {
   }
 };
 
+//오픈웨더 날씨 조회
+const getShipWeatherService = async (lat, lon) => {
+  try {
+    const API_KEY = process.env.OPEN_WEATHER_API_KEY;
+    const API_URL = process.env.OPEN_WEATHER_API_URL;
+    const open_res_data = await axios.get(API_URL, {
+      params: {
+        lat: lat,
+        lon: lon,
+        appid: API_KEY,
+      },
+    });
+    console.log("open_res_data", open_res_data.data);
+    return open_res_data.data;
+  } catch (e) {
+    console.log("error", e);
+    throw e;
+  }
+};
+
 module.exports = {
   postCompanyService,
   postUserService,
@@ -214,4 +235,5 @@ module.exports = {
   manageRwaService,
   getRwaMarketService,
   getRwaMarketDetailService,
+  getShipWeatherService,
 };
