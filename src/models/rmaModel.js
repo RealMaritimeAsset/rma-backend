@@ -43,19 +43,22 @@ const insertRwaData = (rwaDataChg) => {
 //유저등록
 const insertUser = (userData) => {
   return new Promise((resolve, reject) => {
+    console.log("userData.address", userData.address);
     const query =
-      "INSERT INTO User (is_business, business_name, business_ca, address) VALUES (false, ?, ?, ?)";
+      "INSERT INTO User (is_business, business_name, business_ca, address) VALUES (?, ?, ?, ?)";
     const values = [
-      userData.is_business,
+      false,
       userData.business_name,
       userData.business_ca,
       userData.address,
-      //userData.ownedRwaId,
     ];
+    console.log("queru", query);
+    console.log("pool", pool);
     pool.query(query, values, (error, results) => {
       if (error) {
         return reject(error);
       }
+      console.log("results", results);
       resolve(results.affectedRows);
     });
   });
@@ -114,7 +117,7 @@ const insertShipDetail = (shipDetailIpfs) => {
   });
 };
 
-//마이페이지 조회
+//마이 페이지 조회
 const selectMyPageDetail = (address) => {
   return new Promise((resolve, reject) => {
     const query = `    
@@ -138,7 +141,7 @@ const selectMyPageDetail = (address) => {
         return reject(error);
       }
       console.log(results);
-      resolve(results[0]);
+      resolve(results);
     });
   });
 };
@@ -176,7 +179,7 @@ const selectManageRwa = (address) => {
   });
 };
 
-//Rwa 마켓 토큰 조회
+//Rwa 마켓 토큰 목록 조회
 const selectRwaMarket = () => {
   return new Promise((resolve, reject) => {
     const query = `    
@@ -206,6 +209,7 @@ const selectRwaMarket = () => {
   });
 };
 
+//Rwa 마켓 토큰 상세 조회
 const selectRwaMarketDetail = (rwaId) => {
   return new Promise((resolve, reject) => {
     const query = `    

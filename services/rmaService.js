@@ -183,7 +183,6 @@ const manageRwaService = async (address) => {
 };
 
 //RWA 토큰 마켓 조회
-//getRwaMarketService
 const getRwaMarketService = async () => {
   try {
     const data = await rmaModel.selectRwaMarket();
@@ -195,7 +194,7 @@ const getRwaMarketService = async () => {
   }
 };
 
-//getRwaMarketService
+//RWA 토큰 마켓 상세 조회
 const getRwaMarketDetailService = async (rwaId) => {
   try {
     const data = await rmaModel.selectRwaMarketDetail(rwaId);
