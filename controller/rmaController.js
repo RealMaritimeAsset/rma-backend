@@ -3,6 +3,9 @@ const rmaService = require("../services/rmaService");
 const postUser = async (req, res) => {
   try {
     const userData = req.body;
+    if (req.body.address == "") {
+      return res.status(200).send({ res: "" });
+    }
     const data = await rmaService.postUserService(userData);
     res.status(200).send({ res: data });
   } catch (error) {

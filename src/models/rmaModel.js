@@ -44,8 +44,16 @@ const insertRwaData = (rwaDataChg) => {
 const insertUser = (userData) => {
   return new Promise((resolve, reject) => {
     console.log("userData.address", userData.address);
-    const query =
-      "INSERT INTO User (is_business, business_name, business_ca, address) VALUES (?, ?, ?, ?)";
+    // const query =
+    //   "INSERT INTO User (is_business, business_name, business_ca, address) VALUES (?, ?, ?, ?)";
+
+    const query = `      
+    INSERT INTO User (is_business, business_name, business_ca, address)
+    VALUES (?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE
+      business_name = VALUES(business_name),
+      business_ca = VALUES(business_ca)
+    `;
     const values = [
       false,
       userData.business_name,

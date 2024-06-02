@@ -151,7 +151,7 @@ const mintRwaService = async (rwaData) => {
   }
 };
 
-//선박회사 조회 서비스
+//마이페이지 조회 서비스
 const getMypageDetailService = async (address) => {
   try {
     console.log("address3", address);
@@ -236,4 +236,5 @@ module.exports = {
   getRwaMarketService,
   getRwaMarketDetailService,
   getShipWeatherService,
+  postShipDetailService,
 };
