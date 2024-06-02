@@ -190,22 +190,6 @@ const selectManageRwa = (address) => {
 //Rwa 마켓 토큰 목록 조회
 const selectRwaMarket = () => {
   return new Promise((resolve, reject) => {
-    // const query = `
-    // SELECT
-    //   id,
-    //   main_id,
-    //   sub_id,
-    //   token_uri,
-    //   name,
-    //   created_at,
-    //   amount,
-    //   company,
-    //   network,
-    //   user_id,
-    //   ipfs_id,
-    //   sold_amount
-    // FROM Rwa
-    // `;
     const query = `
     SELECT 
       a.id,
@@ -231,7 +215,7 @@ const selectRwaMarket = () => {
       b.expected_date,
       b.imo_number,
       b.expiration,
-      b.due_date,
+      DATE_FORMAT(b.due_date, '%Y-%m-%d') AS due_date,
       100 * (TIMESTAMPDIFF(SECOND, b.due_date, NOW())/ TIMESTAMPDIFF(SECOND, b.due_date, b.created_at) ) AS progress
     FROM Rwa a 
     LEFT JOIN Ipfs b ON b.id = a.ipfs_id
@@ -250,23 +234,6 @@ const selectRwaMarket = () => {
 //Rwa 마켓 토큰 상세 조회
 const selectRwaMarketDetail = (rwaId) => {
   return new Promise((resolve, reject) => {
-    // const query = `
-    // SELECT
-    //   id,
-    //   main_id,
-    //   sub_id,
-    //   token_uri,
-    //   name,
-    //   created_at,
-    //   amount,
-    //   company,
-    //   network,
-    //   user_id,
-    //   ipfs_id,
-    //   sold_amount
-    // FROM Rwa
-    // where id = ?
-    // `;
     const query = `    
     SELECT 
       a.id,
@@ -292,7 +259,7 @@ const selectRwaMarketDetail = (rwaId) => {
       b.expected_date,
       b.imo_number,
       b.expiration,
-      b.due_date,
+      DATE_FORMAT(b.due_date, '%Y-%m-%d') AS due_date,
       100 * (TIMESTAMPDIFF(SECOND, b.due_date, NOW())/ TIMESTAMPDIFF(SECOND, b.due_date, b.created_at) ) AS progress
     FROM Rwa a 
     LEFT JOIN Ipfs b ON b.id = a.ipfs_id
