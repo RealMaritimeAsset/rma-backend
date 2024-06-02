@@ -114,6 +114,9 @@ const postShipDetailService = async (shipDetailIpfs) => {
 //rwa 토큰 민팅 서비스
 const mintRwaService = async (rwaData) => {
   try {
+    const parsedTokenUri = JSON.parse(rwaData.tokenUris);
+
+    console.log("parsedTokenUri", parsedTokenUri);
     console.log("rwaData", rwaData);
     for (let i = 0; i < rwaData.subIdAmounts; i++) {
       console.log("i", i);
@@ -122,7 +125,7 @@ const mintRwaService = async (rwaData) => {
         main_id: rwaData.mainId,
         sub_id: i,
         amount: rwaData.tokenAmounts,
-        token_uri: rwaData.tokenUris[i],
+        token_uri: parsedTokenUri[i],
         name: rwaData.name,
         company: rwaData.company,
         network: rwaData.network,
