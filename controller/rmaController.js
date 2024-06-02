@@ -16,10 +16,11 @@ const postUser = async (req, res) => {
 
 const postCompany = async (req, res) => {
   try {
+    console.log("reqbody", req.body);
     const companyData = {
       id: req.body.id,
       business_name: req.body.business_name,
-      business_ca: req.body.bussiness_ca,
+      business_ca: req.body.business_ca,
       address: req.body.address,
     };
     const data = await rmaService.postCompanyService(companyData);

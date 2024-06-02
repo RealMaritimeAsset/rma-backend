@@ -79,7 +79,7 @@ const updateCompany = (companyData) => {
       "UPDATE User SET is_business = true, business_name = ?, business_ca = ?, address = ? WHERE id = ?";
     const values = [
       companyData.business_name,
-      companyData.bussiness_ca,
+      companyData.business_ca,
       companyData.address,
       companyData.id,
     ];
