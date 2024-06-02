@@ -19,7 +19,7 @@ const postCompany = async (req, res) => {
     const companyData = {
       id: req.body.id,
       business_name: req.body.business_name,
-      bussiness_ca: req.body.bussiness_ca,
+      business_ca: req.body.bussiness_ca,
       address: req.body.address,
     };
     const data = await rmaService.postCompanyService(companyData);

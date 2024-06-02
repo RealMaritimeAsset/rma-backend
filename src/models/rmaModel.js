@@ -190,21 +190,51 @@ const selectManageRwa = (address) => {
 //Rwa 마켓 토큰 목록 조회
 const selectRwaMarket = () => {
   return new Promise((resolve, reject) => {
-    const query = `    
+    // const query = `
+    // SELECT
+    //   id,
+    //   main_id,
+    //   sub_id,
+    //   token_uri,
+    //   name,
+    //   created_at,
+    //   amount,
+    //   company,
+    //   network,
+    //   user_id,
+    //   ipfs_id,
+    //   sold_amount
+    // FROM Rwa
+    // `;
+    const query = `
     SELECT 
-      id,
-      main_id,
-      sub_id,
-      token_uri,
-      name,
-      created_at,
-      amount,
-      company,
-      network,
-      user_id,
-      ipfs_id,
-      sold_amount 
-    FROM Rwa
+      a.id,
+      a.main_id,
+      a.sub_id,
+      a.token_uri,
+      a.name,
+      a.created_at,
+      a.amount,
+      a.company,
+      a.network,
+      a.user_id,
+      a.ipfs_id,
+      a.sold_amount,
+      b.type,
+      b.country,
+      b.name,
+      b.price,
+      b.description,
+      b.uri,
+      b.builder,
+      b.weight,
+      b.expected_date,
+      b.imo_number,
+      b.expiration,
+      b.due_date,
+      100 * (TIMESTAMPDIFF(SECOND, b.due_date, NOW())/ TIMESTAMPDIFF(SECOND, b.due_date, b.created_at) ) AS progress
+    FROM Rwa a 
+    LEFT JOIN Ipfs b ON b.id = a.ipfs_id
     `;
     pool.query(query, (error, results) => {
       // Pass the address as an array
