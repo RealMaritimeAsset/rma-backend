@@ -154,6 +154,40 @@ const selectMyPageDetail = (address) => {
   });
 };
 
+//IPFS 상세 조회
+const selectIpfsDetail = (ipfsId) => {
+  return new Promise((resolve, reject) => {
+    const query = `    
+    SELECT 
+      id,
+      created_at,amount,
+      type,
+      country,
+      company,
+      name,
+      price,
+      description,
+      uri,
+      builder,
+      weight,
+      expected_date,
+      imo_number,
+      expiration,
+      due_date 
+    FROM Ipfs
+    where id = ?
+    `;
+    console.log("ipfsId", ipfsId);
+    pool.query(query, [ipfsId], (error, results) => {
+      if (error) {
+        return reject(error);
+      }
+      console.log(results);
+      resolve(results);
+    });
+  });
+};
+
 //Rwa 토큰 조회
 const selectManageRwa = (address) => {
   return new Promise((resolve, reject) => {
@@ -285,4 +319,5 @@ module.exports = {
   selectManageRwa,
   selectRwaMarket,
   selectRwaMarketDetail,
+  selectIpfsDetail,
 };

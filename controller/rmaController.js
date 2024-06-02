@@ -99,6 +99,18 @@ const getMypageDetail = async (req, res) => {
   }
 };
 
+const getIpfsDetail = async (req, res) => {
+  try {
+    console.log(req.params);
+    const ipfsId = req.params.id;
+    const data = await rmaService.getIpfsDetailService(ipfsId);
+    res.status(200).send({ res: data });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).send(error.message);
+  }
+};
+
 const mintRwa = async (req, res) => {
   try {
     const rwaData = req.body;
@@ -176,4 +188,5 @@ module.exports = {
   getRwaMarket,
   getRwaMarketDetail,
   getShipWeather,
+  getIpfsDetail,
 };

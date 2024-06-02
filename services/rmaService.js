@@ -170,6 +170,20 @@ const getMypageDetailService = async (address) => {
   }
 };
 
+//getIpfsDetail
+//IPFS 상세 데이터 조회
+const getIpfsDetailService = async (ipfsId) => {
+  try {
+    console.log("ipfsId", ipfsId);
+    const data = await rmaModel.selectIpfsDetail(ipfsId);
+    console.log("data", data);
+    return data;
+  } catch (e) {
+    console.log("error", e);
+    throw e;
+  }
+};
+
 //선박회사 조회 서비스
 const manageRwaService = async (address) => {
   try {
@@ -240,4 +254,5 @@ module.exports = {
   getRwaMarketDetailService,
   getShipWeatherService,
   postShipDetailService,
+  getIpfsDetailService,
 };

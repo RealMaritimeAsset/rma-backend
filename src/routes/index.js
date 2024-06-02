@@ -57,4 +57,7 @@ router.get("/api/v1/rwa-market/detail/:id", rmaController.getRwaMarketDetail);
 //오픈웨더 날씨 정보 가져오기
 router.get("/api/v1/ship-weather", rmaController.getShipWeather);
 
+//IPFS 상세 데이터 조회
+router.get("/api/v1/ipfs-detail/:id", rmaController.getIpfsDetail);
+
 module.exports = router;
